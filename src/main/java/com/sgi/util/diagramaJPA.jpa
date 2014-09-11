@@ -1,0 +1,46 @@
+<?xml version="1.0" encoding="UTF-8" standalone="yes"?>
+<jpa:entity-mappings theme="CLASSIC" id="_14073487411731" xsi:schemaLocation="http://java.sun.com/xml/ns/persistence/orm orm_2_1.xsd" xmlns:ns4="http://nbmodeler.java.net" xmlns:jpa="http://java.sun.com/xml/ns/persistence/orm" xmlns:java="http://jcp.org/en/jsr/detail?id=270" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance">
+    <jpa:package>com.sgi.entidades</jpa:package>
+    <jpa:entity class="TipoEquipo" minimized="false" id="_1407348766140">
+        <jpa:attributes>
+            <jpa:id name="id" attribute-type="Long" id="_14073488102315">
+                <jpa:column unique="true" nullable="false" insertable="true" updatable="true" length="255" precision="0" scale="0"/>
+                <jpa:generated-value strategy="IDENTITY"/>
+            </jpa:id>
+            <jpa:basic name="nombre" attribute-type="String" id="_14073488872966">
+                <jpa:column unique="true" nullable="false" insertable="true" updatable="true" length="140"/>
+            </jpa:basic>
+            <jpa:basic name="descripcion" attribute-type="String" id="_14073489355117">
+                <jpa:column unique="false" nullable="true" insertable="true" updatable="true" length="140"/>
+            </jpa:basic>
+            <jpa:one-to-many name="equipos" target-entity="Equipo" fetch="LAZY" mapped-by="tipoEquipo" collection-type="java.util.List" connected-entity-id="_1407348965464" connected-attribute-id="_140734908831112" id="_140734908834213"/>
+        </jpa:attributes>
+    </jpa:entity>
+    <jpa:entity class="Equipo" minimized="false" id="_1407348965464">
+        <jpa:attributes>
+            <jpa:id name="id" attribute-type="Long" id="_14073490032629">
+                <jpa:column unique="false" nullable="true" insertable="true" updatable="true" length="255" precision="0" scale="0"/>
+                <jpa:generated-value strategy="IDENTITY"/>
+            </jpa:id>
+            <jpa:basic name="nombre" attribute-type="String" id="_140734904439110">
+                <jpa:column unique="true" nullable="false" insertable="true" updatable="false" length="140"/>
+            </jpa:basic>
+            <jpa:basic name="imagenUrl" attribute-type="String" id="_140735848023720">
+                <jpa:column unique="false" nullable="true" insertable="true" updatable="true" length="255"/>
+            </jpa:basic>
+            <jpa:many-to-one name="tipoEquipo" target-entity="TipoEquipo" optional="true" primaryKey="false" connected-entity-id="_1407348766140" connected-attribute-id="_140734908834213" id="_140734908831112">
+                <jpa:join-table/>
+            </jpa:many-to-one>
+        </jpa:attributes>
+    </jpa:entity>
+    <jpa:diagram id="_14073487411742">
+        <plane elementRef="_14073487411731" id="_14073487411753_p">
+            <shape elementRef="_1407348766140" id="_1407348766140_gui">
+                <Bounds x="402.0" y="134.0" width="160.0" height="152.0"/>
+            </shape>
+            <shape elementRef="_1407348965464" id="_1407348965464_gui">
+                <Bounds x="652.0" y="134.0" width="136.0" height="152.0"/>
+            </shape>
+        </plane>
+    </jpa:diagram>
+</jpa:entity-mappings>
