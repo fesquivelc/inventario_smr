@@ -21,7 +21,7 @@ public class DAO<T> {
 
     private final String PU = "postgresql-PU";
     private EntityManager em;
-    private Class<T> clase;
+    private final Class<T> clase;
 
     public DAO(Class<T> clase) {
         this.clase = clase;
