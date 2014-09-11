@@ -14,6 +14,7 @@ import javax.swing.JOptionPane;
 import org.jdesktop.beansbinding.AutoBinding;
 import org.jdesktop.beansbinding.AutoBinding.UpdateStrategy;
 import org.jdesktop.beansbinding.BeanProperty;
+import org.jdesktop.observablecollections.ObservableCollections;
 import org.jdesktop.swingbinding.JTableBinding;
 import org.jdesktop.swingbinding.SwingBindings;
 
@@ -244,6 +245,7 @@ public class MantenimientoTipoEquipo extends javax.swing.JInternalFrame {
 
     private void listar() {
         lista = tipoEquipoControlador.buscarTodos();
+        lista = ObservableCollections.observableList(lista);
         JTableBinding binding = SwingBindings.createJTableBinding(UpdateStrategy.READ, lista, tblTipoEquipo);
         
         BeanProperty bNombre = BeanProperty.create("nombre");
