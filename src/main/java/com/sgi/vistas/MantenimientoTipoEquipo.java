@@ -3,12 +3,13 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-
 package com.sgi.vistas;
 
 import com.sgi.controladores.AbstractControlador;
 import com.sgi.controladores.TipoEquipoControlador;
 import com.sgi.entidades.TipoEquipo;
+import com.sgi.util.Utiles;
+import java.util.ArrayList;
 import java.util.List;
 import javax.swing.JOptionPane;
 import org.jdesktop.beansbinding.AutoBinding;
@@ -28,15 +29,15 @@ public class MantenimientoTipoEquipo extends javax.swing.JInternalFrame {
      * Creates new form MantenimientoTipoEquipo
      */
     private static MantenimientoTipoEquipo instancia;
-    
+
     private MantenimientoTipoEquipo() {
         initComponents();
         listar();
 //        mostrar();
     }
-    
-    public static MantenimientoTipoEquipo getInstancia(){
-        if(instancia == null){
+
+    public static MantenimientoTipoEquipo getInstancia() {
+        if (instancia == null) {
             instancia = new MantenimientoTipoEquipo();
         }
         return instancia;
@@ -101,7 +102,7 @@ public class MantenimientoTipoEquipo extends javax.swing.JInternalFrame {
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addComponent(txtNombre, javax.swing.GroupLayout.PREFERRED_SIZE, 140, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(jScrollPane2, javax.swing.GroupLayout.PREFERRED_SIZE, 255, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 21, Short.MAX_VALUE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
                     .addComponent(jButton5, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                     .addComponent(jButton4, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
@@ -138,6 +139,11 @@ public class MantenimientoTipoEquipo extends javax.swing.JInternalFrame {
         jButton2.setText("Editar");
 
         jButton3.setText("Eliminar");
+        jButton3.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jButton3ActionPerformed(evt);
+            }
+        });
 
         tblTipoEquipo.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
@@ -217,11 +223,24 @@ public class MantenimientoTipoEquipo extends javax.swing.JInternalFrame {
         // TODO add your handling code here:
         tipoEquipoControlador.getSeleccionado().setNombre(txtNombre.getText());
         tipoEquipoControlador.getSeleccionado().setDescripcion(txtDescripcion.getText());
-        
+
         tipoEquipoControlador.accion(accion);
         lista.add(tipoEquipoControlador.getSeleccionado());
     }//GEN-LAST:event_jButton4ActionPerformed
 
+    private void jButton3ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton3ActionPerformed
+        // TODO add your handling code here:
+        int[] filas = tblTipoEquipo.getSelectedRows();
+        for (int i = 0; i < filas.length; i++) {
+            TipoEquipo tipoEquipo = lista.get(filas[0]);            
+            if (Utiles.mensajeConfirmacion(this, AbstractControlador.ELIMINAR, tipoEquipo.getNombre())) {
+                lista.remove(tipoEquipo);
+                tipoEquipoControlador.setSeleccionado(tipoEquipo);
+                tipoEquipoControlador.accion(AbstractControlador.ELIMINAR);
+            }
+
+        }
+    }//GEN-LAST:event_jButton3ActionPerformed
 
     private int accion;
     private List<TipoEquipo> lista;
@@ -247,15 +266,15 @@ public class MantenimientoTipoEquipo extends javax.swing.JInternalFrame {
         lista = tipoEquipoControlador.buscarTodos();
         lista = ObservableCollections.observableList(lista);
         JTableBinding binding = SwingBindings.createJTableBinding(UpdateStrategy.READ, lista, tblTipoEquipo);
-        
+
         BeanProperty bNombre = BeanProperty.create("nombre");
         BeanProperty bDescripcion = BeanProperty.create("descripcion");
-        
+
         binding.addColumnBinding(bNombre).setColumnName("NOMBRE");
         binding.addColumnBinding(bDescripcion).setColumnName("DESCRIPCION");
-        
+
         binding.bind();
-        
+
     }
 
     private void mostrar() {

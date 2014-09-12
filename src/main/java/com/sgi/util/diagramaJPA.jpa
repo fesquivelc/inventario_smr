@@ -36,10 +36,10 @@
     <jpa:diagram id="_14073487411742">
         <plane elementRef="_14073487411731" id="_14073487411753_p">
             <shape elementRef="_1407348766140" id="_1407348766140_gui">
-                <Bounds x="402.0" y="134.0" width="160.0" height="152.0"/>
+                <Bounds x="400.0" y="132.0" width="160.0" height="152.0"/>
             </shape>
             <shape elementRef="_1407348965464" id="_1407348965464_gui">
-                <Bounds x="652.0" y="134.0" width="136.0" height="152.0"/>
+                <Bounds x="650.0" y="132.0" width="136.0" height="152.0"/>
             </shape>
         </plane>
     </jpa:diagram>
